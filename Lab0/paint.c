@@ -16,15 +16,15 @@ int main(int argc, char *argv[]){
     // your code here
     float width, height, depth, area;
     printf("width> ");
-    scanf("%f", width);
-    printf("width> ");
-    scanf("%f", height);
-    printf("width> ");
-    scanf("%f", depth);
+    scanf("%f", &width);
+    printf("height> ");
+    scanf("%f", &height);
+    printf("depth> ");
+    scanf("%f", &depth);
     
     area = calcArea(width, height, depth);
     printf("Total Area: %.3f\n", area);
-    printf("Number of cans required: %d", floor(area/200));
+    printf("Number of cans required: %d\n", (int)ceil(area/200));
 }
 
 // float readDimension(const char* name){

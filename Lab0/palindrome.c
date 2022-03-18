@@ -25,6 +25,7 @@ bool readLine(char** line, size_t* size, size_t* length);
 */
 
 bool isPalindrome(const char* line, size_t len);
+char toUpperCase(char letter);
 
 int main(int argc, char *argv[]){
     //your code here
@@ -32,14 +33,15 @@ int main(int argc, char *argv[]){
     size_t size;
     size_t length;
     while(true) {
+      printf("word> ");
       readLine(&line, &size, &length);
-      if(line == ".\n") break;
-
       line[length-1] = '\0';
+      if(line[0] == '.' && line[1] == '\0') break;
+      
       if(isPalindrome(line, length)){
-        printf("\"%s\" is a palindrome\n", line)
+        printf("\"%s\" is a palindrome\n", line);
       } else {
-        printf("\"%s\" is not a palindrome\n", line)
+        printf("\"%s\" is not a palindrome\n", line);
       }
     }
     free(line);
@@ -49,10 +51,10 @@ bool isPalindrome(const char* line, size_t len){
   int i = 0;
   int j = len - 1;
   while(j > i) {
-    if(!isalpha(line[i])) i++;
-    if(!isalpha(line[j])) j--;
-    
-    if(toLowerCase(line[i])!=toLowerCase(line[j]){
+    while(!isalpha(line[i])) i++;
+    while(!isalpha(line[j])) j--;
+
+    if(toUpperCase(line[i]) != toUpperCase(line[j])) {
       return false;
     } else {
       i++;
@@ -61,13 +63,13 @@ bool isPalindrome(const char* line, size_t len){
   }
 }
 
-char toLowerCase(char letter) {
-  if(letter >= 'A') return letter - 'A' + 'a';
+char toUpperCase(char letter) {
+  if(letter >= 'a') return letter - 'a' + 'A';
   return letter;
 }
 
 bool readLine(char** line, size_t* size, size_t* length) {
-  length = getline(line, size, stdin);
-  if(length == -1) return false;
+  *length = getline(line, size, stdin);
+  if(*length == -1) return false;
   return true;
 }
